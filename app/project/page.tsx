@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { Suspense } from "react";
 import { useEffect, useState } from "react";
@@ -20,8 +20,24 @@ const isColorLight = (hexColor: string) => {
   return brightness > 160;
 };
 
+const formatDate = (dateString: string | null) => {
+  if (!dateString) return "Unknown date";
+  const date = new Date(dateString);
+  return date.toLocaleString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    timeZoneName: "short",
+  });
+};
+
 const ProjectContent = () => {
   const projectId = useSearchParams().get("id");
+  const [userBy, setUserBy] = useState("");
+  const [createDate, setCreateDate] = useState("");
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -32,10 +48,13 @@ const ProjectContent = () => {
       try {
         setLoading(true);
 
-        const { data: projectData, error: projectError } = await supabase.from("projects").select("type").eq("id", projectId).single();
+        const { data: projectData, error: projectError } = await supabase.from("projects").select("*").eq("id", projectId).single();
         if (projectError) throw projectError;
 
         if (projectData) {
+          setUserBy(projectData.user_by);
+          setCreateDate(formatDate(projectData.created_at));
+
           const projectType = projectData.type;
 
           if (projectType === "github") {
@@ -45,7 +64,6 @@ const ProjectContent = () => {
             setProject(githubProject);
           } else if (projectType === "custom") {
             const { data: customProject, error: customError } = await supabase.from("custom_projects_data").select("*").eq("project_id", projectId).single();
-
             if (customError) throw customError;
 
             setProject(customProject);
@@ -84,7 +102,7 @@ const ProjectContent = () => {
               </span>
             </h1>
             {project.repo_fullname && (
-              <a href={project.repo_url} target="_blank" className="duration-150 dark:hover:text-zinc-400">
+              <a href={project.repo_url} target="_blank" rel="noopener noreferrer" className="duration-150 dark:hover:text-zinc-400">
                 <FaGithub fontSize={30} />
               </a>
             )}
@@ -117,25 +135,30 @@ const ProjectContent = () => {
           )}
         </div>
       </div>
-      <div className="flex w-11/12 gap-2 md:w-4/5 xl:w-2/3">
-        {project.website_link && (
-          <a href={project.website_link} target="_blank" className="flex w-fit items-center gap-2 rounded-md border-2 px-2 py-1 duration-150 dark:hover:bg-zinc-100 dark:hover:text-zinc-950">
-            <FaLink />
-            Website
-          </a>
-        )}
-        {project.documentation_link && (
-          <a href={project.documentation_link} target="_blank" className="flex w-fit items-center gap-2 rounded-md border-2 px-2 py-1 duration-150 dark:hover:bg-zinc-100 dark:hover:text-zinc-950">
-            <LuBookMarked />
-            Documentation
-          </a>
-        )}
-        {project.instagram_link && (
-          <a href={project.instagram_link} target="_blank" className="flex w-fit items-center gap-2 rounded-md border-2 px-2 py-1 duration-150 dark:hover:bg-zinc-100 dark:hover:text-zinc-950">
-            <FaInstagram />
-            Instagram
-          </a>
-        )}
+      <div className="flex w-11/12 flex-col gap-4 md:w-4/5 xl:w-2/3">
+        <div className="flex w-full gap-2">
+          {project.website_link && (
+            <a href={project.website_link} target="_blank" rel="noopener noreferrer" className="flex w-fit items-center gap-2 rounded-md border-2 px-2 py-1 duration-150 dark:hover:bg-zinc-100 dark:hover:text-zinc-950">
+              <FaLink />
+              Website
+            </a>
+          )}
+          {project.documentation_link && (
+            <a href={project.documentation_link} target="_blank" rel="noopener noreferrer" className="flex w-fit items-center gap-2 rounded-md border-2 px-2 py-1 duration-150 dark:hover:bg-zinc-100 dark:hover:text-zinc-950">
+              <LuBookMarked />
+              Documentation
+            </a>
+          )}
+          {project.instagram_link && (
+            <a href={project.instagram_link} target="_blank" rel="noopener noreferrer" className="flex w-fit items-center gap-2 rounded-md border-2 px-2 py-1 duration-150 dark:hover:bg-zinc-100 dark:hover:text-zinc-950">
+              <FaInstagram />
+              Instagram
+            </a>
+          )}
+        </div>
+        <p className="text-xs text-zinc-500">
+          by {userBy} on {createDate}
+        </p>
       </div>
     </div>
   );

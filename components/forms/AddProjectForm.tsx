@@ -60,7 +60,7 @@ const AddProjectForm: React.FC<AddProjectFormProps> = ({ repo, isManual }) => {
     try {
       const { data: projectData, error: projectError } = await supabase
         .from("projects")
-        .insert([{ user_id: user.id, type: repo ? "github" : "custom" }])
+        .insert([{ user_id: user.id, type: repo ? "github" : "custom", user_by: user.user_metadata.user_name }])
         .select("id")
         .single();
 

@@ -16,6 +16,7 @@ export type Project = {
     website_link: string;
     instagram_link: string;
     documentation_link: string;
+    user_by: string;
 }
 
 export type GithubRepo = {
