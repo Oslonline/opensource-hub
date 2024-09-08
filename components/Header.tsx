@@ -7,6 +7,7 @@ import { CiLogout } from "react-icons/ci";
 import { HiOutlinePlus } from "react-icons/hi2";
 import { FaGithub } from "react-icons/fa";
 import ConfirmationModal from "./commons/ConfirmationModal";
+import Image from "next/image";
 
 export default function Header() {
   const { user, loginWithGitHub, logout } = useAuth();
@@ -28,7 +29,9 @@ export default function Header() {
                 <span className="absolute bottom-0 left-0 h-[1px] w-0 transition-all duration-200 group-hover:w-full dark:bg-zinc-100"></span>
               </Link>
             </div>
-            <span className="hidden md:block">Welcome, {user.user_metadata.user_name}</span>
+            <span className="hidden md:flex items-center gap-2">
+              <Image width={500} height={500} className="h-8 w-8 rounded-full border border-zinc-500" src={user.user_metadata.avatar_url} alt="User github profile image"></Image> Welcome, {user.user_metadata.user_name}
+            </span>
             <div className="flex gap-2">
               <Link className="rounded-md border px-2 py-0.5 duration-150 dark:hover:border-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-zinc-950" href="/dashboard">
                 My Projects
