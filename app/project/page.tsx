@@ -92,10 +92,10 @@ const ProjectContent = () => {
 
   return (
     <div className="flex flex-col items-center justify-center gap-4 p-4">
-      <div className="flex w-11/12 justify-between md:w-4/5 md:gap-10 xl:w-2/3">
+      <div className="flex w-full justify-between md:w-4/5 md:gap-10 xl:w-2/3">
         <div className="flex flex-col gap-4">
-          <div className="flex items-center justify-between gap-20">
-            <h1 className="flex gap-2 text-4xl font-bold">
+          <div className="flex items-start md:items-center justify-between md:flex-row flex-col-reverse md:gap-20">
+            <h1 className="flex gap-2 text-xl md:text-4xl font-bold">
               {project.name || project.repo_fullname}
               <span className="h-fit rounded-full px-2 py-0.5 text-xs" style={{ backgroundColor: languageColor, color: textColor }}>
                 {project.language}
@@ -109,11 +109,11 @@ const ProjectContent = () => {
           </div>
           <div className="flex flex-col gap-2">
             <p className="text-lg">{project.repo_desc || project.short_desc || "No description available."}</p>
-            <p className="w-4/5 md:w-2/3">{project.full_desc}</p>
+            <p className="w-full md:w-2/3">{project.full_desc}</p>
           </div>
         </div>
       </div>
-      <div className="flex w-11/12 md:w-4/5 xl:w-2/3">
+      <div className="flex w-full md:w-4/5 xl:w-2/3">
         <div>
           {project.stars_count !== undefined && project.stars_count !== null && (
             <p className="flex items-center gap-2">
@@ -135,7 +135,7 @@ const ProjectContent = () => {
           )}
         </div>
       </div>
-      <div className="flex w-11/12 flex-col gap-4 md:w-4/5 xl:w-2/3">
+      <div className="flex w-full flex-col gap-4 md:w-4/5 xl:w-2/3">
         <div className="flex w-full gap-2">
           {project.website_link && (
             <a href={project.website_link} target="_blank" rel="noopener noreferrer" className="flex w-fit items-center gap-2 rounded-md border-2 px-2 py-1 duration-150 dark:hover:bg-zinc-100 dark:hover:text-zinc-950">

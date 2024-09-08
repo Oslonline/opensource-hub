@@ -19,7 +19,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="w-max-screen sticky left-0 top-0 z-50 w-screen border-b border-zinc-700 p-4 backdrop-blur-lg">
+      <header className="sticky left-0 top-0 z-50 w-full border-b border-zinc-700 p-4 backdrop-blur-lg">
         {user ? (
           <div className="flex w-full items-center justify-between">
             <div className="flex gap-4">
