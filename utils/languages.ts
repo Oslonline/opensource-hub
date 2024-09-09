@@ -8,6 +8,7 @@ export const programmingLanguages: Language[] = [
     { name: "HTML", color: "#f6897d" },
     { name: "Python", color: "#306998" },
     { name: "Java", color: "#b07219" },
+    { name: "Vue", color: "#2DD4BF" },
     { name: "C#", color: "#178600" },
     { name: "C++", color: "#00599C" },
     { name: "PHP", color: "#4F5D95" },
@@ -31,4 +32,5 @@ export const programmingLanguages: Language[] = [
     { name: "SAS", color: "#3D8EB9" },
     { name: "Ada", color: "#00205B" },
     { name: "Fortran", color: "#4F81C4" },
+    { name: "Hack", color: "#1E293B" },
 ];
