@@ -20,7 +20,7 @@ export default function Footer() {
       document.documentElement.classList.remove("dark");
     }
   }, [isDarkMode]);
-  
+
   return (
     <div className="flex flex-col items-center justify-center gap-2 p-4">
       <div className="flex gap-2">
