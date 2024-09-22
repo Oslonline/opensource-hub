@@ -30,43 +30,26 @@ export default function MyProjectsPage() {
           data: { user },
           error: userError,
         } = await supabase.auth.getUser();
-
-        if (userError) throw userError;
-
-        if (!user) {
+        if (userError || !user) {
           router.push("/");
           return;
         }
 
-        const { data: githubProjects, error: githubError } = await supabase.from("github_projects_data").select("*").eq("user_id", user.id);
+        const [{ data: githubProjects, error: githubError }, { data: customProjects, error: customError }] = await Promise.all([supabase.from("github_projects_data").select("*").eq("user_id", user.id), supabase.from("custom_projects_data").select("*").eq("user_id", user.id)]);
         if (githubError) throw githubError;
-        const { data: customProjects, error: customError } = await supabase.from("custom_projects_data").select("*").eq("user_id", user.id);
         if (customError) throw customError;
 
-        if (githubProjects && githubProjects.length > 0) {
+        if (githubProjects?.length > 0) {
           const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
-          if (sessionError) throw sessionError;
-
-          const accessToken = sessionData.session?.provider_token;
-
-          if (!accessToken) {
-            await logout();
+          if (sessionError || !sessionData.session?.provider_token) {
+            logout();
             setError("GitHub token is missing.");
-            setLoading(false);
             return;
           }
-          await fetchGitHubProjects(accessToken, githubProjects);
-        } else {
-          setProjects(customProjects || []);
+          await fetchGitHubProjects(sessionData.session.provider_token, githubProjects);
         }
 
-        if (githubProjects && customProjects) {
-          setProjects([...githubProjects, ...customProjects]);
-        } else if (githubProjects) {
-          setProjects(githubProjects);
-        } else if (customProjects) {
-          setProjects(customProjects);
-        }
+        setProjects([...githubProjects, ...customProjects].filter(Boolean));
       } catch (error: any) {
         setError("An error occurred while fetching projects.");
         console.error(error.message);
@@ -77,44 +60,33 @@ export default function MyProjectsPage() {
 
     const fetchGitHubProjects = async (accessToken: string, githubProjects: Project[]) => {
       try {
-        const updatedProjects: Project[] = [];
-        for (const project of githubProjects) {
-          const res = await fetch(`https://api.github.com/repos/${project.repo_fullname}`, {
-            headers: {
-              Authorization: `token ${accessToken}`,
-            },
-          });
+        const updatedProjects = await Promise.all(
+          githubProjects.map(async (project) => {
+            const res = await fetch(`https://api.github.com/repos/${project.repo_fullname}`, {
+              headers: { Authorization: `token ${accessToken}` },
+            });
 
-          if (!res.ok) continue;
-          const githubData: GithubRepo = await res.json();
+            if (!res.ok) return project;
+            const githubData: GithubRepo = await res.json();
 
-          if (githubData.description !== project.repo_desc || githubData.stargazers_count !== project.stars_count || githubData.forks_count !== project.forks_count || githubData.open_issues_count !== project.open_issue_count || githubData.language !== project.language) {
-            const { error: updateError } = await supabase
-              .from("github_projects_data")
-              .update({
-                repo_desc: githubData.description,
-                stars_count: githubData.stargazers_count,
-                forks_count: githubData.forks_count,
-                open_issue_count: githubData.open_issues_count,
-                language: githubData.language,
-              })
-              .eq("id", project.id);
-
-            if (updateError) throw updateError;
-
-            updatedProjects.push({
-              ...project,
+            const updates = {
               repo_desc: githubData.description,
+              website_link: githubData.homepage,
               stars_count: githubData.stargazers_count,
               forks_count: githubData.forks_count,
               open_issue_count: githubData.open_issues_count,
               language: githubData.language,
-            });
-          } else {
-            updatedProjects.push(project);
-          }
-        }
+            };
 
+            if (Object.values(updates).some((val, i) => val !== Object.values(project)[i])) {
+              const { error: updateError } = await supabase.from("github_projects_data").update(updates).eq("id", project.id);
+              if (updateError) throw updateError;
+              return { ...project, ...updates };
+            }
+
+            return project;
+          }),
+        );
         setProjects(updatedProjects);
       } catch (error) {
         console.error("Error fetching GitHub projects:", error);
@@ -153,7 +125,7 @@ export default function MyProjectsPage() {
           )}
         </div>
       )}
-      <Link className="flex items-center justify-center md:hidden gap-2 rounded-md border px-2 py-2 duration-150 dark:border-zinc-100 dark:hover:border-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-zinc-950" href="/dashboard/add-project">
+      <Link className="flex items-center justify-center gap-2 rounded-md border px-2 py-2 duration-150 dark:border-zinc-100 dark:hover:border-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-zinc-950 md:hidden" href="/dashboard/add-project">
         Add Project
         <HiOutlinePlus fontSize={20} />
       </Link>
