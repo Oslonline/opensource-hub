@@ -6,13 +6,11 @@ import { useRouter } from "next/navigation";
 import AddProjectForm from "@/components/forms/AddProjectForm";
 import { HiOutlinePencilAlt } from "react-icons/hi";
 import { GithubRepo } from "@/types/types";
-import { useNotification } from "@/context/NotificationContext";
 import { useAuth } from "@/context/AuthContext";
 
 const AddProjectsPage = () => {
   const [repos, setRepos] = useState<GithubRepo[]>([]);
   const [selectedRepo, setSelectedRepo] = useState<GithubRepo | null>(null);
-  const { notification, setNotification } = useNotification();
   const [isManual, setIsManual] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -83,10 +81,6 @@ const AddProjectsPage = () => {
   const handleManualAdd = () => {
     setSelectedRepo(null);
     setIsManual(true);
-  };
-
-  const handleSuccess = (message: string) => {
-    setNotification({ message, type: "success" });
   };
 
   return (

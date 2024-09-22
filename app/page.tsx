@@ -54,7 +54,7 @@ export default function Index() {
         } catch (error) {
           setError("An unexpected error occurred.");
         } finally {
-          setLoading(false); // Fin du chargement des projets
+          setLoading(false);
         }
       };
 
@@ -119,7 +119,7 @@ export default function Index() {
         </div>
 
         {/* Loading state */}
-        {loadingCount || loading ? (
+        {loading ? (
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
             {[...Array(totalProjectsCount || 8)].map((_, index) => (
               <div key={index} className="flex animate-pulse flex-col justify-between gap-2 rounded-md border-2 bg-zinc-950 p-4">

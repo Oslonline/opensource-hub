@@ -13,14 +13,14 @@ interface AddProjectFormProps {
 }
 
 const AddProjectForm: React.FC<AddProjectFormProps> = ({ repo, isManual }) => {
-  const [projectName, setProjectName] = useState("");
-  const [projectShortDesc, setProjectShortDesc] = useState("");
-  const [projectFullDesc, setProjectFullDesc] = useState("");
+  const [projectName, setProjectName] = useState<string>("");
+  const [projectShortDesc, setProjectShortDesc] = useState<string>("");
+  const [projectFullDesc, setProjectFullDesc] = useState<string>("");
   const [selectedLanguage, setSelectedLanguage] = useState<string>("");
-  const [codeLink, setCodeLink] = useState("");
-  const [websiteLink, setWebsiteLink] = useState("");
-  const [instagramLink, setInstagramLink] = useState("");
-  const [documentationLink, setDocumentationLink] = useState("");
+  const [codeLink, setCodeLink] = useState<string>("");
+  const [websiteLink, setWebsiteLink] = useState<string>("");
+  const [instagramLink, setInstagramLink] = useState<string>("");
+  const [documentationLink, setDocumentationLink] = useState<string>("");
   const supabase = createClient();
   const router = useRouter();
   const { setNotification } = useNotification();

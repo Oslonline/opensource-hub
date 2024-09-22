@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <div className="flex flex-col items-center justify-center gap-2 p-4">
       <div>
-        <a className="group" href="">
+        <a className="group" target="_blank" href="https://github.com/Oslonline/opensource-hub">
           <FaGithub className="duration-150 group-hover:text-zinc-400" fontSize={24} />
         </a>
       </div>
