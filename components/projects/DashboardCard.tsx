@@ -41,7 +41,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({ id, project_id, language,
 
   return (
     <>
-      <div key={id} className="flex flex-col justify-between gap-2 rounded-md border-2 p-4 dark:border-zinc-500">
+      <div key={id} className="flex flex-col justify-between gap-2 rounded-md border-2 border-zinc-400 p-4 dark:border-zinc-600">
         <div className="flex flex-col gap-1">
           <div className="flex justify-between gap-4">
             <p className="line-clamp-1 font-semibold">{name || repo_fullname}</p>
@@ -53,12 +53,12 @@ const DashboardCard: React.FC<DashboardCardProps> = ({ id, project_id, language,
             <p className="line-clamp-2">{repo_desc || short_desc || "No short description provided"}</p>
             <div className="flex min-w-fit flex-col">
               {stars_count !== undefined && (
-                <span className="flex items-center gap-1 text-zinc-400">
+                <span className="flex items-center gap-1 text-zinc-600 dark:text-zinc-400">
                   <FaRegStar /> {stars_count}
                 </span>
               )}
               {forks_count !== undefined && (
-                <span className="flex items-center gap-1 text-zinc-400">
+                <span className="flex items-center gap-1 text-zinc-600 dark:text-zinc-400">
                   <FaCodeFork /> {forks_count}
                 </span>
               )}
@@ -67,7 +67,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({ id, project_id, language,
         </div>
 
         <div className="flex items-center justify-between gap-2 md:justify-start">
-          <Link className="rounded-md border px-4 py-1 duration-150 dark:hover:border-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-zinc-950" href={`/dashboard/edit-project?id=${project_id}`}>
+          <Link className="rounded-md border border-zinc-950 px-4 py-1 duration-150 hover:bg-zinc-950 hover:text-zinc-100 dark:border-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-zinc-950" href={`/dashboard/edit-project?id=${project_id}`}>
             Edit
           </Link>
           <button onClick={() => setIsModalOpen(true)} className="flex items-center justify-center rounded-md border border-red-700 p-1 px-4 text-red-700 duration-150 dark:hover:bg-zinc-100">

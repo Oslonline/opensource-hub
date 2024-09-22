@@ -127,7 +127,7 @@ const AddProjectForm: React.FC<AddProjectFormProps> = ({ repo, isManual }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-md border-2 p-4">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-md border-2 border-zinc-400 bg-zinc-50 p-4 dark:border-zinc-600 dark:bg-zinc-950">
       <p className="text-end text-sm italic">
         <span className="text-red-500"> * </span>: Required fields
       </p>
@@ -147,7 +147,7 @@ const AddProjectForm: React.FC<AddProjectFormProps> = ({ repo, isManual }) => {
               value={projectName}
               onChange={(e) => setProjectName(e.target.value)}
               readOnly={!!repo}
-              className={`appearance-none rounded-md px-2 py-1 caret-emerald-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-emerald-500 dark:bg-zinc-100 dark:text-zinc-900 ${repo ? "cursor-not-allowed select-none opacity-60 ring-0 focus:outline-transparent" : ""}`}
+              className={`appearance-none rounded-md border border-gray-400 px-2 py-1 caret-emerald-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-emerald-500 dark:border-transparent dark:bg-zinc-100 dark:text-zinc-900 ${repo ? "cursor-not-allowed select-none bg-zinc-200 opacity-60 ring-0 focus:outline-transparent dark:bg-none" : ""}`}
             />
           </div>
           <div className="flex w-full flex-col">
@@ -161,7 +161,7 @@ const AddProjectForm: React.FC<AddProjectFormProps> = ({ repo, isManual }) => {
               value={codeLink}
               onChange={(e) => setCodeLink(e.target.value)}
               readOnly={!!repo}
-              className={`appearance-none rounded-md px-2 py-1 caret-emerald-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-emerald-500 dark:bg-zinc-100 dark:text-zinc-900 ${repo ? "cursor-not-allowed select-none opacity-60 ring-0 focus:outline-transparent" : ""}`}
+              className={`appearance-none rounded-md border border-gray-400 px-2 py-1 caret-emerald-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-emerald-500 dark:border-transparent dark:bg-zinc-100 dark:text-zinc-900 ${repo ? "cursor-not-allowed select-none bg-zinc-200 opacity-60 ring-0 focus:outline-transparent dark:bg-none" : ""}`}
             />
           </div>
         </div>
@@ -178,7 +178,7 @@ const AddProjectForm: React.FC<AddProjectFormProps> = ({ repo, isManual }) => {
               onChange={(e) => setProjectShortDesc(e.target.value)}
               maxLength={100}
               readOnly={!!repo?.description}
-              className={`appearance-none rounded-md px-2 py-1 caret-emerald-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-emerald-500 dark:bg-zinc-100 dark:text-zinc-900 ${repo?.description ? "cursor-not-allowed select-none opacity-60 ring-0 focus:outline-transparent" : ""}`}
+              className={`appearance-none rounded-md border border-gray-400 px-2 py-1 caret-emerald-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-emerald-500 dark:border-transparent dark:bg-zinc-100 dark:text-zinc-900 ${repo?.description ? "cursor-not-allowed select-none bg-zinc-200 opacity-60 ring-0 focus:outline-transparent dark:bg-none" : ""}`}
             />
           </div>
           <div className="w-full">
@@ -190,7 +190,7 @@ const AddProjectForm: React.FC<AddProjectFormProps> = ({ repo, isManual }) => {
               onChange={handleLanguageSelect}
               value={selectedLanguage}
               disabled={!!repo}
-              className={`w-full rounded-md border px-2 py-[4.9px] duration-150 dark:focus:bg-zinc-100 dark:focus:text-zinc-900 ${repo ? "cursor-not-allowed select-none opacity-60 ring-0 focus:outline-transparent dark:bg-zinc-100 dark:text-zinc-900" : "dark:bg-zinc-950 dark:hover:bg-zinc-100 dark:hover:text-zinc-900"}`}
+              className={`w-full rounded-md border border-zinc-400 bg-zinc-50 px-2 py-[4.9px] duration-150 dark:focus:bg-zinc-100 dark:focus:text-zinc-900 ${repo ? "cursor-not-allowed select-none bg-zinc-200 opacity-60 ring-0 focus:outline-transparent dark:bg-zinc-100 dark:bg-none dark:text-zinc-900" : "dark:bg-zinc-950 dark:hover:bg-zinc-100 dark:hover:text-zinc-900"}`}
             >
               <option value="">Select your project language</option>
               {languages.map((language) => (
@@ -207,7 +207,7 @@ const AddProjectForm: React.FC<AddProjectFormProps> = ({ repo, isManual }) => {
             value={projectFullDesc}
             onChange={(e) => setProjectFullDesc(e.target.value)}
             maxLength={500}
-            className="min-h-16 appearance-none rounded-md px-2 py-1 caret-emerald-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-emerald-500 dark:bg-zinc-100 dark:text-zinc-900"
+            className="min-h-16 appearance-none rounded-md border border-gray-400 px-2 py-1 caret-emerald-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-emerald-500 dark:border-transparent dark:bg-zinc-100 dark:text-zinc-900"
           />
         </div>
       </div>
@@ -241,7 +241,7 @@ const AddProjectForm: React.FC<AddProjectFormProps> = ({ repo, isManual }) => {
               value={websiteLink}
               onChange={(e) => setWebsiteLink(e.target.value)}
               readOnly={!!repo?.homepage}
-              className={`appearance-none rounded-md px-2 py-1 caret-emerald-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-emerald-500 dark:bg-zinc-100 dark:text-zinc-900 ${repo?.homepage ? "cursor-not-allowed select-none opacity-60 ring-0 focus:outline-transparent" : ""}`}
+              className={`appearance-none rounded-md border border-gray-400 px-2 py-1 caret-emerald-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-emerald-500 dark:border-transparent dark:bg-zinc-100 dark:text-zinc-900 ${repo?.homepage ? "cursor-not-allowed select-none bg-zinc-200 opacity-60 ring-0 focus:outline-transparent dark:bg-none" : ""}`}
             />
           </div>
           <div className="flex w-full flex-col">
@@ -251,7 +251,7 @@ const AddProjectForm: React.FC<AddProjectFormProps> = ({ repo, isManual }) => {
               value={documentationLink}
               onChange={(e) => setDocumentationLink(e.target.value)}
               maxLength={80}
-              className={`appearance-none rounded-md px-2 py-1 caret-emerald-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-emerald-500 dark:bg-zinc-100 dark:text-zinc-900`}
+              className={`appearance-none rounded-md border border-gray-400 px-2 py-1 caret-emerald-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-emerald-500 dark:border-transparent dark:bg-zinc-100 dark:text-zinc-900`}
             />
           </div>
           <div className="flex w-full flex-col">
@@ -261,7 +261,7 @@ const AddProjectForm: React.FC<AddProjectFormProps> = ({ repo, isManual }) => {
               value={instagramLink}
               onChange={(e) => setInstagramLink(e.target.value)}
               maxLength={80}
-              className={`appearance-none rounded-md px-2 py-1 caret-emerald-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-emerald-500 dark:bg-zinc-100 dark:text-zinc-900`}
+              className={`appearance-none rounded-md border border-gray-400 px-2 py-1 caret-emerald-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-emerald-500 dark:border-transparent dark:bg-zinc-100 dark:text-zinc-900`}
             />
           </div>
         </div>

@@ -18,7 +18,7 @@ const HomeCard: React.FC<HomeCardProps> = ({ id, project_id, repo_fullname, shor
   const textColor = isColorLight(languageColor) ? "#000" : "#fff";
 
   return (
-    <Link href={`/project/?id=${project_id}`} key={id} className="flex flex-col justify-between gap-2 rounded-md border-2 bg-zinc-950 p-4 duration-150 hover:scale-[1.02] dark:border-zinc-500 dark:hover:border-zinc-300">
+    <Link href={`/project/?id=${project_id}`} key={id} className="flex flex-col justify-between gap-2 rounded-md border-2 border-zinc-400 bg-zinc-50 p-4 duration-150 hover:scale-[1.02] hover:border-zinc-700 dark:border-zinc-600 dark:bg-zinc-950 dark:hover:border-zinc-300">
       <div className="flex flex-col gap-1">
         <div className="flex items-center justify-between gap-4">
           <span className="flex items-center gap-1 font-semibold">
@@ -32,12 +32,12 @@ const HomeCard: React.FC<HomeCardProps> = ({ id, project_id, repo_fullname, shor
           <p className="line-clamp-2">{repo_desc || short_desc || "No short description provided"}</p>
           <div className="flex min-w-fit flex-col">
             {stars_count !== undefined && (
-              <span className="flex items-center gap-1 text-zinc-400">
+              <span className="flex items-center gap-1 text-zinc-600 dark:text-zinc-400">
                 <FaRegStar /> {stars_count}
               </span>
             )}
             {forks_count !== undefined && (
-              <span className="flex items-center gap-1 text-zinc-400">
+              <span className="flex items-center gap-1 text-zinc-600 dark:text-zinc-400">
                 <FaCodeFork /> {forks_count}
               </span>
             )}

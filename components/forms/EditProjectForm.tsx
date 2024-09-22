@@ -87,7 +87,7 @@ const EditProjectForm: React.FC<EditProjectFormProps> = ({ projectData }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-md border-2 p-4">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-md border-2 border-zinc-400 bg-zinc-50 p-4 dark:border-zinc-600 dark:bg-zinc-950">
       <div className="flex flex-col">
         <h2 className="flex items-center gap-2 pb-1 text-xl font-semibold">
           <BsInfoSquare />
@@ -101,7 +101,7 @@ const EditProjectForm: React.FC<EditProjectFormProps> = ({ projectData }) => {
               value={projectName}
               onChange={(e) => setProjectName(e.target.value)}
               readOnly={projectData.type === "github"}
-              className={`appearance-none rounded-md px-2 py-1 caret-teal-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-teal-500 dark:bg-zinc-100 dark:text-zinc-900 ${projectData.type === "github" ? "cursor-not-allowed select-none opacity-60 ring-0 focus:outline-transparent" : ""}`}
+              className={`appearance-none rounded-md border border-zinc-400 px-2 py-1 caret-teal-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-teal-500 dark:border-transparent dark:bg-zinc-100 dark:text-zinc-900 ${projectData.type === "github" ? "bg-zinc-200 dark:bg-none cursor-not-allowed select-none opacity-60 ring-0 focus:outline-transparent" : ""}`}
             />
           </div>
           <div className="flex w-full flex-col">
@@ -111,7 +111,7 @@ const EditProjectForm: React.FC<EditProjectFormProps> = ({ projectData }) => {
               value={codeLink}
               onChange={(e) => setCodeLink(e.target.value)}
               readOnly={projectData.type === "github"}
-              className={`appearance-none rounded-md px-2 py-1 caret-teal-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-teal-500 dark:bg-zinc-100 dark:text-zinc-900 ${projectData.type === "github" ? "cursor-not-allowed select-none opacity-60 ring-0 focus:outline-transparent" : ""}`}
+              className={`appearance-none rounded-md border border-zinc-400 px-2 py-1 caret-teal-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-teal-500 dark:border-transparent dark:bg-zinc-100 dark:text-zinc-900 ${projectData.type === "github" ? "bg-zinc-200 dark:bg-none cursor-not-allowed select-none opacity-60 ring-0 focus:outline-transparent" : ""}`}
             />
           </div>
         </div>
@@ -124,7 +124,7 @@ const EditProjectForm: React.FC<EditProjectFormProps> = ({ projectData }) => {
               onChange={(e) => setProjectShortDesc(e.target.value)}
               maxLength={100}
               readOnly={projectData.type === "github"}
-              className={`appearance-none rounded-md px-2 py-1 caret-teal-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-teal-500 dark:bg-zinc-100 dark:text-zinc-900 ${projectData.type === "github" ? "cursor-not-allowed select-none opacity-60 ring-0 focus:outline-transparent" : ""}`}
+              className={`appearance-none rounded-md border border-zinc-400 px-2 py-1 caret-teal-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-teal-500 dark:border-transparent dark:bg-zinc-100 dark:text-zinc-900 ${projectData.type === "github" ? "cursor-not-allowed select-none bg-zinc-200 opacity-60 ring-0 focus:outline-transparent dark:bg-none" : ""}`}
             />
           </div>
           <div className="w-full">
@@ -133,7 +133,7 @@ const EditProjectForm: React.FC<EditProjectFormProps> = ({ projectData }) => {
               onChange={handleLanguageSelect}
               value={selectedLanguage}
               disabled={projectData.type === "github"}
-              className={`w-full rounded-md border px-2 py-[4.9px] duration-150 dark:focus:bg-zinc-100 dark:focus:text-zinc-900 ${projectData.type === "github" ? "cursor-not-allowed select-none opacity-60 ring-0 focus:outline-transparent dark:bg-zinc-100 dark:text-zinc-900" : "dark:bg-zinc-950 dark:hover:bg-zinc-100 dark:hover:text-zinc-900"}`}
+              className={`w-full rounded-md border border-zinc-400 bg-zinc-50 px-2 py-[4.9px] duration-150 dark:focus:bg-zinc-100 dark:focus:text-zinc-900 ${projectData.type === "github" ? "cursor-not-allowed select-none bg-zinc-200 opacity-60 ring-0 focus:outline-transparent dark:bg-zinc-100 dark:bg-none dark:text-zinc-900" : "dark:bg-zinc-950 dark:hover:bg-zinc-100 dark:hover:text-zinc-900"}`}
             >
               <option value="">Select your project language</option>
               {languages.map((language) => (
@@ -150,7 +150,7 @@ const EditProjectForm: React.FC<EditProjectFormProps> = ({ projectData }) => {
             value={projectFullDesc}
             onChange={(e) => setProjectFullDesc(e.target.value)}
             maxLength={500}
-            className="min-h-20 appearance-none rounded-md px-2 py-1 caret-teal-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-teal-500 dark:bg-zinc-100 dark:text-zinc-900"
+            className="min-h-20 appearance-none rounded-md border border-zinc-400 px-2 py-1 caret-teal-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-teal-500 dark:border-transparent dark:bg-zinc-100 dark:text-zinc-900"
           />
         </div>
       </div>
@@ -185,18 +185,28 @@ const EditProjectForm: React.FC<EditProjectFormProps> = ({ projectData }) => {
                 value={websiteLink}
                 onChange={(e) => setWebsiteLink(e.target.value)}
                 readOnly={projectData.type === "github"}
-                className={`w-full appearance-none rounded-md px-2 py-1 caret-teal-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-teal-500 dark:bg-zinc-100 dark:text-zinc-900 ${projectData.type === "github" ? "group cursor-not-allowed select-none opacity-60 ring-0 focus:outline-transparent" : ""}`}
+                className={`w-full appearance-none rounded-md border border-zinc-400 px-2 py-1 caret-teal-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-teal-500 dark:border-transparent dark:bg-zinc-100 dark:text-zinc-900 ${projectData.type === "github" ? "group cursor-not-allowed select-none bg-zinc-200 opacity-60 ring-0 focus:outline-transparent dark:bg-none" : ""}`}
               />
               {projectData.type === "github" && !projectData.website_link && <span className="absolute -top-5 right-0 select-none rounded-md px-2 text-xs text-transparent duration-300 dark:group-hover:bg-zinc-800 dark:group-hover:text-zinc-400">You need to add the link directly on GitHub.</span>}
             </div>
           </div>
           <div className="flex w-full flex-col">
             <label>Documentation website link</label>
-            <input type="url" value={documentationLink} onChange={(e) => setDocumentationLink(e.target.value)} className={`appearance-none rounded-md px-2 py-1 caret-teal-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-teal-500 dark:bg-zinc-100 dark:text-zinc-900`} />
+            <input
+              type="url"
+              value={documentationLink}
+              onChange={(e) => setDocumentationLink(e.target.value)}
+              className={`appearance-none rounded-md border border-zinc-400 px-2 py-1 caret-teal-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-teal-500 dark:border-transparent dark:bg-zinc-100 dark:text-zinc-900`}
+            />
           </div>
           <div className="flex w-full flex-col">
             <label>Instagram profile link</label>
-            <input type="url" value={instagramLink} onChange={(e) => setInstagramLink(e.target.value)} className={`appearance-none rounded-md px-2 py-1 caret-teal-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-teal-500 dark:bg-zinc-100 dark:text-zinc-900`} />
+            <input
+              type="url"
+              value={instagramLink}
+              onChange={(e) => setInstagramLink(e.target.value)}
+              className={`appearance-none rounded-md border border-zinc-400 px-2 py-1 caret-teal-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-teal-500 dark:border-transparent dark:bg-zinc-100 dark:text-zinc-900`}
+            />
           </div>
         </div>
       </div>

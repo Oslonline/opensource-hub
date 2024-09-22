@@ -91,10 +91,17 @@ const AddProjectsPage = () => {
           <p>Add a new open-source project to the collection. You can import your project directly from GitHub or add it manually.</p>
         </div>
         <div className="mt-4 flex w-full flex-col justify-center gap-2 md:mt-2 md:w-fit md:flex-row">
-          <button onClick={handleManualAdd} className="flex w-full items-center justify-center gap-2 rounded-md border px-2 py-2 duration-150 dark:border-zinc-100 dark:hover:border-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-zinc-950 md:w-fit md:justify-start">
+          <button
+            onClick={handleManualAdd}
+            className="flex w-full items-center justify-center gap-2 rounded-md border border-zinc-950 px-2 py-2 duration-150 hover:bg-zinc-950 hover:text-zinc-100 dark:border-zinc-100 dark:hover:border-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-zinc-950 md:w-fit md:justify-start"
+          >
             <HiOutlinePencilAlt fontSize={20} /> Add manually
           </button>
-          <select onChange={handleRepoSelect} value={selectedRepo ? selectedRepo.full_name : ""} className="h-full rounded-md border px-2 py-2.5 duration-150 dark:bg-zinc-950 dark:hover:bg-zinc-100 dark:hover:text-zinc-900 dark:focus:bg-zinc-100 dark:focus:text-zinc-900">
+          <select
+            onChange={handleRepoSelect}
+            value={selectedRepo ? selectedRepo.full_name : ""}
+            className="h-full rounded-md border border-zinc-950 bg-zinc-50 px-2 py-2.5 duration-150 hover:cursor-pointer hover:bg-zinc-950 hover:text-zinc-50 focus:bg-zinc-950 focus:text-zinc-50 dark:bg-zinc-950 dark:hover:bg-zinc-100 dark:border-zinc-50 dark:hover:text-zinc-900 dark:focus:bg-zinc-100 dark:focus:text-zinc-900"
+          >
             <option className="flex" value="">
               Select a GitHub repository to import
             </option>

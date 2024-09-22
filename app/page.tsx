@@ -92,13 +92,13 @@ export default function Index() {
 
       {/* Filters Section */}
       <div className="flex flex-col gap-6">
-        <div className="flex flex-col items-center gap-4 rounded-md border-2 bg-zinc-950 p-4 dark:border-zinc-500">
+        <div className="flex flex-col items-center gap-4 rounded-md border-2 border-zinc-400 bg-zinc-50 p-4 duration-150 dark:border-zinc-600 dark:bg-zinc-950">
           <input
             type="text"
             placeholder="Search projects..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="mb-2 w-full appearance-none rounded-md px-2 py-2 caret-teal-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-teal-500 dark:bg-zinc-100 dark:text-zinc-900"
+            className="mb-2 w-full appearance-none rounded-md border border-zinc-400 px-2 py-2 caret-teal-500 focus:outline-none focus:outline-2 focus:outline-offset-0 focus:outline-teal-500 dark:border-transparent dark:bg-zinc-100 dark:text-zinc-900"
           />
 
           <span className="h-0.5 w-2/3 rounded-full bg-custom-radial-gradient"></span>
@@ -106,7 +106,11 @@ export default function Index() {
           <div className="w-full">
             <div className="flex flex-col gap-1">
               <p className="text-sm italic">Language</p>
-              <select value={selectedLanguage} onChange={(e) => setSelectedLanguage(e.target.value)} className="w-fit rounded-md border px-3 py-[4.9px] duration-150 dark:bg-zinc-950 dark:hover:bg-zinc-100 dark:hover:text-zinc-900 dark:focus:bg-zinc-100 dark:focus:text-zinc-900">
+              <select
+                value={selectedLanguage}
+                onChange={(e) => setSelectedLanguage(e.target.value)}
+                className="w-fit rounded-md border border-zinc-400 bg-zinc-50 px-3 py-[4.9px] duration-150 hover:bg-zinc-950 hover:text-zinc-100 focus:bg-zinc-950 focus:text-zinc-100 dark:border-zinc-600 dark:bg-zinc-950 dark:hover:bg-zinc-100 dark:hover:text-zinc-900 dark:focus:bg-zinc-100 dark:focus:text-zinc-900"
+              >
                 <option value="All">All</option>
                 {programmingLanguages.map((language, index) => (
                   <option key={index} value={language.name}>
@@ -122,10 +126,10 @@ export default function Index() {
         {loading ? (
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
             {[...Array(totalProjectsCount || 8)].map((_, index) => (
-              <div key={index} className="flex animate-pulse flex-col justify-between gap-2 rounded-md border-2 bg-zinc-950 p-4">
-                <div className="h-6 w-2/3 rounded bg-zinc-700"></div>
-                <div className="h-4 w-full rounded bg-zinc-700"></div>
-                <div className="h-4 w-1/2 rounded bg-zinc-700"></div>
+              <div key={index} className="flex animate-pulse flex-col justify-between gap-2 rounded-md border-2 border-zinc-400 bg-zinc-50 p-4 dark:border-zinc-600 dark:bg-zinc-950">
+                <div className="h-6 w-2/3 rounded bg-zinc-300 dark:bg-zinc-700"></div>
+                <div className="h-4 w-full rounded bg-zinc-300 dark:bg-zinc-700"></div>
+                <div className="h-4 w-full rounded bg-zinc-300 dark:bg-zinc-700"></div>
               </div>
             ))}
           </div>
