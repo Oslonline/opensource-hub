@@ -14,7 +14,7 @@ const isColorLight = (hexColor: string) => {
 };
 
 const HomeCard: React.FC<HomeCardProps> = ({ id, project_id, repo_fullname, short_desc, repo_desc, stars_count, forks_count, name, language }) => {
-  const languageColor = programmingLanguages.find((lang) => lang.name.toLowerCase() === language.toLowerCase())?.color || "#cccccc";
+  const languageColor = programmingLanguages.find((lang) => lang.name.toLowerCase() === language?.toLowerCase())?.color || "#cccccc";
   const textColor = isColorLight(languageColor) ? "#000" : "#fff";
 
   return (

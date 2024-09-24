@@ -42,7 +42,7 @@ export type DashboardCardProps = {
     stars_count?: number;
     forks_count?: number;
     name?: string;
-    language: string;
+    language?: string;
 }
 
 export type HomeCardProps = {
@@ -56,7 +56,7 @@ export type HomeCardProps = {
     stars_count?: number;
     forks_count?: number;
     open_issue_count?: number;
-    language: string
+    language?: string
 }
 
 export type EditProjectFormProps = {

@@ -83,7 +83,7 @@ const ProjectContent = () => {
     if (projectId) fetchProject();
   }, [projectId, supabase]);
 
-  const languageColor = programmingLanguages.find((lang) => lang.name.toLowerCase() === project?.language.toLowerCase())?.color || "#cccccc";
+  const languageColor = programmingLanguages.find((lang) => lang.name.toLowerCase() === project?.language?.toLowerCase())?.color || "#cccccc";
   const textColor = isColorLight(languageColor) ? "#000" : "#fff";
 
   if (loading) return <p>Loading...</p>;
@@ -94,8 +94,8 @@ const ProjectContent = () => {
     <div className="flex flex-col items-center justify-center gap-4 p-4">
       <div className="flex w-full justify-between md:w-4/5 md:gap-10 xl:w-2/3">
         <div className="flex flex-col gap-4">
-          <div className="flex items-start md:items-center justify-between md:flex-row flex-col-reverse md:gap-20">
-            <h1 className="flex gap-2 text-xl md:text-4xl font-bold">
+          <div className="flex flex-col-reverse items-start justify-between md:flex-row md:items-center md:gap-20">
+            <h1 className="flex gap-2 text-xl font-bold md:text-4xl">
               {project.name || project.repo_fullname}
               <span className="h-fit rounded-full px-2 py-0.5 text-xs" style={{ backgroundColor: languageColor, color: textColor }}>
                 {project.language}

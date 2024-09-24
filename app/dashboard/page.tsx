@@ -35,21 +35,25 @@ export default function MyProjectsPage() {
           return;
         }
 
+        // Correction: Assurez-vous que githubProjects et customProjects ne sont pas null
         const [{ data: githubProjects, error: githubError }, { data: customProjects, error: customError }] = await Promise.all([supabase.from("github_projects_data").select("*").eq("user_id", user.id), supabase.from("custom_projects_data").select("*").eq("user_id", user.id)]);
         if (githubError) throw githubError;
         if (customError) throw customError;
 
-        if (githubProjects?.length > 0) {
+        const validGithubProjects = githubProjects || []; // Si null, force à []
+        const validCustomProjects = customProjects || []; // Si null, force à []
+
+        if (validGithubProjects.length > 0) {
           const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
           if (sessionError || !sessionData.session?.provider_token) {
             logout();
             setError("GitHub token is missing.");
             return;
           }
-          await fetchGitHubProjects(sessionData.session.provider_token, githubProjects);
+          await fetchGitHubProjects(sessionData.session.provider_token, validGithubProjects);
         }
 
-        setProjects([...githubProjects, ...customProjects].filter(Boolean));
+        setProjects([...validGithubProjects, ...validCustomProjects].filter(Boolean));
       } catch (error: any) {
         setError("An error occurred while fetching projects.");
         console.error(error.message);
@@ -125,7 +129,7 @@ export default function MyProjectsPage() {
           )}
         </div>
       )}
-      <Link className="flex items-center justify-center gap-2 rounded-md border px-2 py-2 duration-150 dark:border-zinc-100 dark:hover:border-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-zinc-950 md:hidden" href="/dashboard/add-project">
+      <Link className="flex items-center justify-center gap-2 rounded-md border px-2 py-2 duration-150 md:hidden dark:border-zinc-100 dark:hover:border-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-zinc-950" href="/dashboard/add-project">
         Add Project
         <HiOutlinePlus fontSize={20} />
       </Link>

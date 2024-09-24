@@ -25,7 +25,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({ id, project_id, language,
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { notification, setNotification } = useNotification();
 
-  const languageColor = programmingLanguages.find((lang) => lang.name.toLowerCase() === language.toLowerCase())?.color || "#cccccc";
+  const languageColor = programmingLanguages.find((lang) => lang.name.toLowerCase() === language?.toLowerCase())?.color || "#cccccc";
   const textColor = isColorLight(languageColor) ? "#000" : "#fff";
 
   const handleDelete = async () => {
